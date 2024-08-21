@@ -54,7 +54,7 @@ void setup() {
   size(640,480,P3D); // scales the output. helpful for GIFs, best to use original 
                        // dimensions for images once settings are dialled in
                        
-  animated = false; // turning this on will output a GIF. 
+  animated = true; // turning this on will output a GIF. 
                     //     make sure to un-comment the 2 lines for the library 
                     //     at the top, the 5 lines in void setup, and the 2 
                     //     addframe and export.finish lines at the end of void draw
