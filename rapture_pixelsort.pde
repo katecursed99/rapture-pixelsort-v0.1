@@ -24,8 +24,8 @@
 
 //import processing.video.*;  // livestream cam
 
-//import gifAnimation.*; // un-comment for GIFs
-//GifMaker gifExport; // un-comment for GIFs
+import gifAnimation.*; // un-comment for GIFs
+GifMaker gifExport; // un-comment for GIFs
 
 //declaring some global variables we may or may not need
 PGraphics pg2;
@@ -40,6 +40,8 @@ String filename;
 boolean animated;
 String inputFilename;
 int intensity;
+float animLength;
+float startFrame;
 
 void setup() {
   
@@ -54,11 +56,13 @@ void setup() {
   size(640,480,P3D); // scales the output. helpful for GIFs, best to use original 
                        // dimensions for images once settings are dialled in
                        
-  animated = false; // turning this on will output a GIF. 
+  animated = true; // turning this on will output a GIF. 
                     //     make sure to un-comment the 2 lines for the library 
                     //     at the top, the 5 lines in void setup, and the 2 
                     //     addframe and export.finish lines at the end of void draw
                     //     or it won't save your GIF
+  animLength = 100; // how many frames of animation to save for GIF
+  startFrame = 1; // what frame to start recording the animation at
                     
   // /SETTINGS //
   
@@ -66,11 +70,11 @@ void setup() {
   
   if (animated == true) {
   // for GIF stuff
- // filename = ("output_" + floor(mode) + ".gif");
- // gifExport = new GifMaker(this,filename);
- // gifExport.setRepeat(0);
- // gifExport.setTransparent(0,0,255);
- // gifExport.setQuality(8);
+  filename = ("output_" + floor(mode) + ".gif");
+  gifExport = new GifMaker(this,filename);
+  gifExport.setRepeat(0);
+  gifExport.setTransparent(0,0,255);
+  gifExport.setQuality(8);
   // for GIF stuff
   }
   // for live cam 
@@ -366,15 +370,15 @@ void draw() {
     }
   }
   
-    if (frameCount > 1) {
+    if (frameCount > startFrame) {
       if (animated == true) {
   // gifExport.setDelay(1);
-  //  gifExport.addFrame();
+    gifExport.addFrame();
       }
     }
-  if (frameCount == 100) {
+  if (frameCount == startFrame+animLength) {
     if (animated == true) {
-  //  gifExport.finish();
+    gifExport.finish();
   }
     }
   }
