@@ -24,8 +24,8 @@
 
 //import processing.video.*;  // livestream cam
 
-import gifAnimation.*; // un-comment for GIFs
-GifMaker gifExport; // un-comment for GIFs
+//import gifAnimation.*; // un-comment for GIFs
+//GifMaker gifExport; // un-comment for GIFs
 
 //declaring some global variables we may or may not need
 PGraphics pg2;
@@ -47,16 +47,17 @@ void setup() {
   
   // SETTINGS //
   
-  mode = 7; // determines how it processes each pixel. 0-8 currently, more soon
+  mode = 4; // determines how it processes each pixel. 0-8 currently, more soon
   
   intensity = 140; // threshold for determining which pixels are processed
   vshift = -10; // factor for scaling how far each pixel travels from its original home.
               //     if you're new, try -10 through 10 first
   inputFilename = "composition 2.png"; // make sure name and file extension are correct
-  size(640,480,P3D); // scales the output. helpful for GIFs, best to use original 
-                       // dimensions for images once settings are dialled in
+  size(640,480,P3D); // first two numbers scale the output. helpful for preview, best to 
+                     //     use original dimensions once settings are dialled in
+                     
                        
-  animated = true; // turning this on will output a GIF. 
+  animated = false; // turning this on will output a GIF. 
                     //     make sure to un-comment the 2 lines for the library 
                     //     at the top, the 5 lines in void setup, and the 2 
                     //     addframe and export.finish lines at the end of void draw
@@ -71,10 +72,10 @@ void setup() {
   if (animated == true) {
   // for GIF stuff
   filename = ("output_" + floor(mode) + ".gif");
-  gifExport = new GifMaker(this,filename);
-  gifExport.setRepeat(0);
-  gifExport.setTransparent(0,0,255);
-  gifExport.setQuality(8);
+ // gifExport = new GifMaker(this,filename);
+//  gifExport.setRepeat(0);
+//  gifExport.setTransparent(0,0,255);
+//  gifExport.setQuality(8);
   // for GIF stuff
   }
   // for live cam 
@@ -373,12 +374,12 @@ void draw() {
     if (frameCount > startFrame) {
       if (animated == true) {
   // gifExport.setDelay(1);
-    gifExport.addFrame();
+  //  gifExport.addFrame();
       }
     }
   if (frameCount == startFrame+animLength) {
     if (animated == true) {
-    gifExport.finish();
+  //  gifExport.finish();
   }
     }
   }
