@@ -40,6 +40,8 @@ String filename;
 boolean animated;
 String inputFilename;
 int intensity;
+float animLength;
+float startFrame;
 
 void setup() {
   
@@ -60,7 +62,7 @@ void setup() {
                     //     addframe and export.finish lines at the end of void draw
                     //     or it won't save your GIF
   animLength = 100; // how many frames of animation to save for GIF
-  startFrame = 1 // what frame to start recording the animation at
+  startFrame = 1; // what frame to start recording the animation at
                     
   // /SETTINGS //
   
