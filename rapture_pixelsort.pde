@@ -32,9 +32,6 @@ PGraphics pg2;
 PImage   pg;
 //Capture cam; // for livestreams, comment out for images
 int vshift=0;
-float r1;
-float r2;
-float r3;
 float mode;
 String filename;
 boolean animated;
@@ -47,17 +44,17 @@ void setup() {
   
   // SETTINGS //
   
-  mode = 4; // determines how it processes each pixel. 0-8 currently, more soon
+  mode = 2; // determines how it processes each pixel. 0-8 currently, more soon
   
-  intensity = 140; // threshold for determining which pixels are processed
-  vshift = -10; // factor for scaling how far each pixel travels from its original home.
+  intensity = 87; // threshold for determining which pixels are processed
+  vshift = -30; // factor for scaling how far each pixel travels from its original home.
               //     if you're new, try -10 through 10 first
-  inputFilename = "composition 2.png"; // make sure name and file extension are correct
-  size(640,480,P3D); // first two numbers scale the output. helpful for preview, best to 
+  inputFilename = "dead internet.png"; // make sure name and file extension are correct
+  size(1000,1000,P3D); // first two numbers scale the output. helpful for preview, best to 
                      //     use original dimensions once settings are dialled in
                      
                        
-  animated = false; // turning this on will output a GIF. 
+ // animated = false; // turning this on will output a GIF. 
                     //     make sure to un-comment the 2 lines for the library 
                     //     at the top, the 5 lines in void setup, and the 2 
                     //     addframe and export.finish lines at the end of void draw
@@ -67,14 +64,14 @@ void setup() {
                     
   // /SETTINGS //
   
-  frameRate(30);
+  frameRate(12);
   
   if (animated == true) {
   // for GIF stuff
-  filename = ("output_" + floor(mode) + ".gif");
+//  filename = ("dead internet_" + floor(mode) + ".gif");
  // gifExport = new GifMaker(this,filename);
 //  gifExport.setRepeat(0);
-//  gifExport.setTransparent(0,0,255);
+ // gifExport.setTransparent(0,0,255);
 //  gifExport.setQuality(8);
   // for GIF stuff
   }
@@ -82,7 +79,7 @@ void setup() {
  // String[] cameras = Capture.list();
 //  cam = new Capture(this, cameras[1]);
 //  cam.start();
-  // comment out for image
+  // for live cam
   
  
   
@@ -91,7 +88,6 @@ void setup() {
   
   
   pg = loadImage(inputFilename);
-  r1=random(0,9);
   pg2 = createGraphics(width, height, P3D);
   
 }
@@ -143,8 +139,6 @@ void draw() {
  // pg2.background(0);
 
  // pg2.rotate(frameCount*0.02);
- // r2=random(0,9);
-//  r3=random(0,9);
 //  pg2.stroke(255);
  // pg2.fill(200);
 //  pg2.rectMode(CENTER);
@@ -172,13 +166,13 @@ void draw() {
     noStroke();
 
 
-    int r = (pixelColor >> 16) & 0xFF;  // Faster way of getting red(argb)
-    int g = (pixelColor >> 8) & 0xFF;   // Faster way of getting green(argb)
-    int b = pixelColor & 0xFF;          // Faster way of getting blue(argb)
+    int r = (pixelColor >> 16) & 0xFF;  
+    int g = (pixelColor >> 8) & 0xFF;   
+    int b = pixelColor & 0xFF;          
     fill(r, g, b);
     color pixCol = color(r, g, b);
     int v = r+g+b/3;
-  //   int v = r+g;
+
   
   if (mode == 0) {
     colorMode(RGB);
@@ -334,7 +328,7 @@ void draw() {
         rect(0,0,1,1);
         
         } else {
-        rect(0,0,1,1);
+        rect(v*vshift*0.03,h*vshift*0.08,1,1);
         }
         pop();
       
@@ -343,7 +337,7 @@ void draw() {
   
     
     index++;
-  //  image(pg2, 0, 0, width, height);
+
   
     }
     popMatrix();
@@ -351,7 +345,7 @@ void draw() {
 
 
   
- // image(pg2,0,0,width,height);
+
   if (keyPressed) {
       if (key == 's') {
       saveFrame("output_" + floor(mode) + ".png");
@@ -373,13 +367,12 @@ void draw() {
   
     if (frameCount > startFrame) {
       if (animated == true) {
-  // gifExport.setDelay(1);
   //  gifExport.addFrame();
       }
     }
   if (frameCount == startFrame+animLength) {
     if (animated == true) {
-  //  gifExport.finish();
+//    gifExport.finish();
   }
     }
   }
