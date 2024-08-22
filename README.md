@@ -15,6 +15,7 @@
 //a and d keys to switch modes on the fly
 //hold 1 and 2 keys to shift threshold for effect
 //change base values for all settings down in void setup
+//up and down arrow keys control how much each pixel moves
 //
 //animated mode depends on gifAnimation library
 //livestream from camera depends on processing.video library
