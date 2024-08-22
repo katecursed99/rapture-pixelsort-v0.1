@@ -14,6 +14,7 @@
 //s key saves still image
 //a and d keys to switch modes on the fly
 //hold 1 and 2 keys to shift threshold for effect
+//up and down arrow keys control how much each pixel moves (vshift)
 //change base values for all settings down in void setup
 //
 //animated mode depends on gifAnimation library
